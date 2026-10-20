@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Nappy</string>
+    <string name="widget_calorie_name">Nappy Calories &amp; Macros</string>
+    <string name="widget_calorie_desc">Track daily calories and macros with Nappy at a glance.</string>
+</resources>

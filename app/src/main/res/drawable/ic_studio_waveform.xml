@@ -1,0 +1,36 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="32"
+    android:viewportHeight="32">
+    <!-- Bar 1 (Outer Left) -->
+    <path
+        android:pathData="M7,12 L7,20"
+        android:strokeWidth="2.8"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round" />
+    <!-- Bar 2 (Mid Left) -->
+    <path
+        android:pathData="M11.5,8 L11.5,24"
+        android:strokeWidth="2.8"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round" />
+    <!-- Bar 3 (Center Peak - Gold Tone) -->
+    <path
+        android:pathData="M16,4.5 L16,27.5"
+        android:strokeWidth="3.2"
+        android:strokeColor="#F5D98B"
+        android:strokeLineCap="round" />
+    <!-- Bar 4 (Mid Right) -->
+    <path
+        android:pathData="M20.5,8 L20.5,24"
+        android:strokeWidth="2.8"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round" />
+    <!-- Bar 5 (Outer Right) -->
+    <path
+        android:pathData="M25,12 L25,20"
+        android:strokeWidth="2.8"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round" />
+</vector>

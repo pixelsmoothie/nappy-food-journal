@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="zen_dark_bg">#FF191817</color>
+    <color name="zen_light_bg">#FFFFFFEB</color>
+    <color name="zen_coral">#FFE07A5F</color>
+    <color name="vibrant_green">#FF6FDC45</color>
+    <color name="vibrant_cobalt">#FF026DFE</color>
+    <color name="vibrant_orange">#FFFF5E36</color>
+</resources>

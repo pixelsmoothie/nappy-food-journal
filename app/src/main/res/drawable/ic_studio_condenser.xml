@@ -1,0 +1,37 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="32"
+    android:viewportHeight="32">
+    <!-- Studio Capsule Head -->
+    <path
+        android:pathData="M16,3 C12.7,3 10,5.7 10,9 L10,15 C10,18.3 12.7,21 16,21 C19.3,21 22,18.3 22,15 L22,9 C22,5.7 19.3,3 16,3 Z"
+        android:fillColor="#FFFFFF" />
+    <!-- Fine Diaphragm Split Line -->
+    <path
+        android:pathData="M10,10.5 L22,10.5"
+        android:strokeWidth="0.8"
+        android:strokeColor="#221F1C" />
+    <!-- Jewel Indicator Dot (Gold) -->
+    <path
+        android:pathData="M16,7.5 m -1,0 a 1,1 0 1,0 2,0 a 1,1 0 1,0 -2,0"
+        android:fillColor="#D4AF37" />
+    <!-- Acoustic Shockmount Cradle Arc -->
+    <path
+        android:pathData="M6,13 C6,18.5 10.5,23 16,23 C21.5,23 26,18.5 26,13"
+        android:strokeWidth="2.2"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round" />
+    <!-- Vertical Stand Stem -->
+    <path
+        android:pathData="M16,23.5 L16,28.5"
+        android:strokeWidth="2.2"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round" />
+    <!-- Heavy Solid Base Bar -->
+    <path
+        android:pathData="M11,28.5 L21,28.5"
+        android:strokeWidth="2.2"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round" />
+</vector>

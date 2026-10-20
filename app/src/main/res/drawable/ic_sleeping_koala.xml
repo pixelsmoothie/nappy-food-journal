@@ -1,0 +1,71 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="36dp"
+    android:height="36dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Branch -->
+    <path
+        android:pathData="M6,46 Q32,42 58,48"
+        android:strokeWidth="4.5"
+        android:strokeColor="#8D6E63"
+        android:strokeLineCap="round" />
+    <!-- Leaf -->
+    <path
+        android:pathData="M48,45 Q55,38 52,30"
+        android:strokeWidth="3"
+        android:strokeColor="#4CAF50"
+        android:strokeLineCap="round" />
+    <!-- Koala Body -->
+    <path
+        android:pathData="M17,38 A13,9 0 1,0 43,38 A13,9 0 1,0 17,38"
+        android:fillColor="#9E9E9E" />
+    <!-- Left Ear Outer -->
+    <path
+        android:pathData="M11.5,25 A6.5,6.5 0 1,0 24.5,25 A6.5,6.5 0 1,0 11.5,25"
+        android:fillColor="#BDBDBD" />
+    <!-- Left Ear Inner -->
+    <path
+        android:pathData="M14.5,25 A3.5,3.5 0 1,0 21.5,25 A3.5,3.5 0 1,0 14.5,25"
+        android:fillColor="#F8BBD0" />
+    <!-- Right Ear Outer -->
+    <path
+        android:pathData="M31.5,23 A6.5,6.5 0 1,0 44.5,23 A6.5,6.5 0 1,0 31.5,23"
+        android:fillColor="#BDBDBD" />
+    <!-- Right Ear Inner -->
+    <path
+        android:pathData="M34.5,23 A3.5,3.5 0 1,0 41.5,23 A3.5,3.5 0 1,0 34.5,23"
+        android:fillColor="#F8BBD0" />
+    <!-- Koala Head -->
+    <path
+        android:pathData="M18,29 A10,10 0 1,0 38,29 A10,10 0 1,0 18,29"
+        android:fillColor="#9E9E9E" />
+    <!-- Nose -->
+    <path
+        android:pathData="M24.5,32 A3.5,5 0 1,0 31.5,32 A3.5,5 0 1,0 24.5,32"
+        android:fillColor="#37474F" />
+    <!-- Left Sleeping Eye -->
+    <path
+        android:pathData="M22,29 Q24,31 26,29"
+        android:strokeWidth="1.6"
+        android:strokeColor="#263238"
+        android:strokeLineCap="round" />
+    <!-- Right Sleeping Eye -->
+    <path
+        android:pathData="M30,28 Q32,30 34,28"
+        android:strokeWidth="1.6"
+        android:strokeColor="#263238"
+        android:strokeLineCap="round" />
+    <!-- Zzz -->
+    <path
+        android:pathData="M43,15 L48,15 L43,19 L48,19"
+        android:strokeWidth="1.5"
+        android:strokeColor="#7C4DFF"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:pathData="M49,9 L55,9 L49,14 L55,14"
+        android:strokeWidth="2"
+        android:strokeColor="#7C4DFF"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+</vector>

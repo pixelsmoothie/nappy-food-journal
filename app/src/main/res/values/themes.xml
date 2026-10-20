@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Default theme: Zen Dark (#191817) -->
+    <style name="Theme.NappyTracker" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/zen_dark_bg</item>
+        <item name="android:statusBarColor">@color/zen_dark_bg</item>
+        <item name="android:navigationBarColor">@color/zen_dark_bg</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="31">@color/zen_dark_bg</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="31">@drawable/ic_splash_logo</item>
+        <item name="android:windowSplashScreenIconBackgroundColor" tools:targetApi="31">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
+    </style>
+
+    <style name="Theme.NappyTracker.Dark" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/zen_dark_bg</item>
+        <item name="android:statusBarColor">@color/zen_dark_bg</item>
+        <item name="android:navigationBarColor">@color/zen_dark_bg</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="31">@color/zen_dark_bg</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="31">@drawable/ic_splash_logo</item>
+        <item name="android:windowSplashScreenIconBackgroundColor" tools:targetApi="31">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
+    </style>
+
+    <style name="Theme.NappyTracker.Light" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/zen_light_bg</item>
+        <item name="android:statusBarColor">@color/zen_light_bg</item>
+        <item name="android:navigationBarColor">@color/zen_light_bg</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="31">@color/zen_light_bg</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="31">@drawable/ic_splash_logo</item>
+        <item name="android:windowSplashScreenIconBackgroundColor" tools:targetApi="31">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+    </style>
+</resources>
