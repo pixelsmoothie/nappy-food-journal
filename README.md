@@ -1,88 +1,91 @@
-# Nappy Food Journal 🥑
+# Nappy Food Journal
 
-A minimalist, high-craft food and calorie tracking application for Android powered by Jetpack Compose and Gemini AI.
+A lightweight Android food journal built in Kotlin and Jetpack Compose that uses Gemini to parse natural language meal notes, with strict deterministic arithmetic and Atwater energy checks to prevent AI hallucinations.
 
-Inspired by clean studio aesthetics, **Nappy Food Journal** removes the friction from nutritional logging with natural language input, instant deterministic macro breakdowns, evidence-backed calorie estimation, and streak tracking.
-
----
-
-## ✨ Features
-
-- **Natural Language Food Input**: Log meals as you naturally think of them (e.g., *"2 poached eggs on sourdough with a side of avocado"*).
-- **Hybrid Nutrition Pipeline**:
-  - **Deterministic Calculator**: Accurately computes exact macros when precise portions are given.
-  - **Gemini AI Integration**: Intelligently parses messy real-world food descriptions, portion sizes, and preparation styles.
-  - **Evidence Engine**: Validates nutritional data against verifiable web queries and reference sources (supported by Tavily search integration).
-- **Minimalist Studio Design**: Clean typography, calm warm-toned canvas palette, custom micro-interactions, and Lottie animations (celebrating streaks, loading states, and trophies).
-- **Home Screen Calorie Widget**: Quick-glance daily progress directly from the Android home screen.
-- **Privacy-First**: Operates directly on-device with your personal API keys stored strictly in your local environment.
+Most AI calorie trackers just ask an LLM: *"How many calories are in this meal?"* and trust whatever number it spits out. LLMs are notoriously bad at arithmetic and invent macros out of thin air. Nappy decouples the pipeline: Gemini is used strictly for entity extraction, while all macro math and physical checks happen deterministically in code.
 
 ---
 
-## 🛠️ Tech Stack & Architecture
+## How It Works (The 4-Stage Pipeline)
 
-- **Platform**: Android (Min SDK 26, Target SDK 35)
-- **Language**: Kotlin 2.0+
-- **UI Framework**: Jetpack Compose + Material 3 Design
-- **AI & ML**: 
-  - Google Gemini API (`gemini-2.5-flash` / `gemini-1.5-flash`)
-  - ML Kit Barcode Scanning & TensorFlow Lite models
-- **Networking & Serialization**: OkHttp 4, Kotlinx Serialization JSON
-- **Animations**: Lottie Compose
-- **Build System**: Gradle Kotlin DSL (`build.gradle.kts`)
+When you type something like `"2 rotis with 1 bowl dal and 50g paneer"`:
+
+```
+[User Note] 
+     │
+     ▼ (Stage 1: Gemini Parser)
+[Extracted Items & States: 2 rotis, 1 bowl dal, 50g paneer]
+     │
+     ▼ (Stage 2: Evidence Engine)
+[Check Local Benchmarks (NIN / USDA) ──> Fallback to Tavily Web Search]
+     │
+     ▼ (Stage 3: Physical Sanity Check)
+[Atwater 4-4-9 factor check + Mass conservation assert]
+     │
+     ▼ (Stage 4: Deterministic Math)
+[Scale 100g baselines to user portion via pure Kotlin]
+```
+
+### 1. Entity Extraction (`FoodInputParser.kt`)
+- Sends the raw text to Gemini Flash with a constrained JSON schema.
+- **Rule #1: Zero AI math.** Gemini is forbidden from calculating calories. It only extracts:
+  - Food name (canonicalized)
+  - Numeric quantity & unit
+  - Physical state (`RAW`, `DRY`, or `COOKED`) — because 100g raw rice (~360 kcal) is vastly different from 100g cooked rice (~130 kcal).
+  - Automatically accounts for 5g cooking oil if a dish was cooked as a sabji/curry.
+
+### 2. Evidence Engine (`EvidenceEngine.kt`)
+- **Local Cache First:** Standard Indian and global staples (roti, dal, boiled egg, rice, chicken breast, soya chunks, paneer) are resolved locally from ICMR-NIN and USDA 100g baselines with zero API latency.
+- **Web Fallback:** For unlisted or branded foods (e.g., *"Nutrela Soya Granules"*), it queries the Tavily Search API for the official nutrition label and cites the source domain.
+
+### 3. Physical Sanity & Atwater Check (`NutritionValidator.kt`)
+Before any data is accepted or saved, it must pass physical biological laws:
+1. **Mass Conservation:** $\text{Protein} + \text{Carbs} + \text{Fat} \le \text{Total Food Weight} \times 1.05$. (100g of food cannot have 120g of macros).
+2. **Atwater 4-4-9 Check:**
+   $$\text{Expected Calories} = (4 \times \text{Protein}) + (4 \times \text{Carbs}) + (9 \times \text{Fat})$$
+   If the reported calories deviate by more than **20%** from the physical energy density, it flags a warning. (20% tolerance accounts for dietary fiber and FDA/FSSAI regulatory rounding).
+
+### 4. Deterministic Scaling (`DeterministicCalculator.kt`)
+- All unit conversions (scoops, bowls, pieces, grams, ml) use verified food density maps ($g/mL$).
+- Scales from the 100g benchmark to the exact portion size using deterministic arithmetic in Kotlin.
+- Logs an explicit arithmetic trace for every single calculated item.
 
 ---
 
-## 🚀 Getting Started
+## Tech Stack
 
-### Prerequisites
+- **OS / Platform**: Android (Min SDK 26, Target SDK 35)
+- **Language**: Kotlin 2.0
+- **UI**: Jetpack Compose + Material 3
+- **Networking**: OkHttp 4, Gson
+- **LLM / APIs**: Google Gemini API (`gemini-2.5-flash`), Tavily Search API
+- **Build**: Gradle Kotlin DSL (`build.gradle.kts`)
 
-- **Android Studio** (Ladybug / Jellyfish or newer recommended)
-- **Android SDK** API 35
-- **JDK**: Java 17
+---
 
-### Installation & Setup
+## Setup & Running
 
-1. **Clone the repository**:
+1. **Clone the repo:**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/pixelsmoothie/nappy-food-journal.git
    cd nappy-food-journal
    ```
 
-2. **Configure API Keys**:
-   Copy `local.properties.example` to `local.properties`:
-   ```bash
-   cp local.properties.example local.properties
-   ```
-   Add your keys in `local.properties`:
+2. **Add API keys:**
+   Create a `local.properties` file in the root directory:
    ```properties
-   sdk.dir=PATH_TO_YOUR_ANDROID_SDK
-   gemini_api_key=YOUR_GEMINI_API_KEY
-   tavily_api_key=YOUR_TAVILY_API_KEY # Optional
+   sdk.dir=/path/to/Android/Sdk
+   gemini_api_key=your_gemini_api_key_here
+   tavily_api_key=your_tavily_api_key_here # optional for web search
    ```
-   > ⚠️ **Note**: `local.properties` is ignored by Git to ensure your credentials are never committed.
 
-3. **Build the Project**:
-   Open the project in Android Studio or compile via command line:
+3. **Build:**
+   Open in Android Studio or compile via CLI:
    ```bash
    ./gradlew assembleDebug
    ```
 
-4. **Run Unit Tests**:
+4. **Run Unit Tests:**
    ```bash
    ./gradlew test
    ```
-
----
-
-## 🔒 Security & Privacy
-
-- All sensitive credentials and API keys are read via Gradle `buildConfigField` from `local.properties` or environment variables at build time.
-- Secrets are never hardcoded into repository source files.
-- Keystores, signing certificates, and local machine SDK paths are strictly excluded via `.gitignore`.
-
----
-
-## 📄 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
