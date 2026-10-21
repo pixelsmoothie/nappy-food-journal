@@ -10,20 +10,16 @@ Most AI calorie trackers just ask an LLM: *"How many calories are in this meal?"
 
 When you type something like `"2 rotis with 1 bowl dal and 50g paneer"`:
 
-```
-[User Note] 
-     │
-     ▼ (Stage 1: Gemini Parser)
-[Extracted Items & States: 2 rotis, 1 bowl dal, 50g paneer]
-     │
-     ▼ (Stage 2: Evidence Engine)
-[Check Local Benchmarks (NIN / USDA) ──> Fallback to Tavily Web Search]
-     │
-     ▼ (Stage 3: Physical Sanity Check)
-[Atwater 4-4-9 factor check + Mass conservation assert]
-     │
-     ▼ (Stage 4: Deterministic Math)
-[Scale 100g baselines to user portion via pure Kotlin]
+```mermaid
+flowchart TD
+    A["Raw Meal Note<br/><i>'2 rotis with 1 bowl dal and 50g paneer'</i>"] --> B["Stage 1: FoodInputParser<br/>Extract items, portions, and physical state (RAW vs COOKED)"]
+    B --> C{"Stage 2: EvidenceEngine<br/>Is food in local benchmark cache?"}
+    C -- "Yes (Staple)" --> D["Local Cache<br/>ICMR-NIN & USDA 100g baselines"]
+    C -- "No (Branded / Custom)" --> E["Tavily Web Search<br/>Retrieve 100g nutrition facts label"]
+    D --> F["Stage 3: NutritionValidator<br/>Atwater 4-4-9 check & Mass conservation assert"]
+    E --> F
+    F --> G["Stage 4: DeterministicCalculator<br/>Scale 100g baselines to portion using verified densities"]
+    G --> H["Logged Meal Entry<br/>Verified macros & complete arithmetic audit trace"]
 ```
 
 ### 1. Entity Extraction (`FoodInputParser.kt`)
